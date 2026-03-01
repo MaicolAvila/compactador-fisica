@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --muted: #171717;
+  --muted-foreground: #737373;
+  --accent-neon: #00ff88;
+  --accent-electric: #00d4ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+/* Grid background pattern - engineering blueprint style */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Dot pattern alternative */
+.dots-bg {
+  background-image: radial-gradient(
+    circle at center,
+    rgba(0, 255, 136, 0.15) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* Button glow on hover */
+.btn-glow {
+  @apply transition-all duration-300;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+/* Glassmorphism */
+.glass {
+  @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl;
+}
