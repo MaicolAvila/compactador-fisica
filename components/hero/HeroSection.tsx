@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useSimulationStore } from "@/store/simulationStore";
 
 const CompactorCanvas = dynamic(() => import("./CompactorCanvas"), {
   ssr: false,
@@ -13,6 +14,8 @@ const CompactorCanvas = dynamic(() => import("./CompactorCanvas"), {
 });
 
 export default function HeroSection() {
+  const { derived, params, currentMaterial } = useSimulationStore();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -27,15 +30,19 @@ export default function HeroSection() {
             <span className="text-accent-neon">Manual</span>
           </h1>
           <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-            Proyecto de ingeniería y física: ventaja mecánica 4:1. Reduce el volumen de residuos con una palanca y un pistón. Sostenible y educativo.
+            Plataforma de simulacion fisica en tiempo real. Configura L1/L2, material y friccion para visualizar como la fuerza de entrada de {params.inputForce.toFixed(0)} N se convierte en {derived.outputForceIdeal.toFixed(0)} N ideales.
           </p>
+          <div className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start">
+            <span className="px-3 py-2 rounded-md bg-background/50 border border-white/10 text-sm">VM actual: {derived.vm.toFixed(2)}:1</span>
+            <span className="px-3 py-2 rounded-md bg-background/50 border border-white/10 text-sm">Material: {currentMaterial.name}</span>
+          </div>
           <motion.a
             href="#algodoo"
             className="inline-block px-8 py-3 rounded-lg bg-accent-neon text-background font-semibold btn-glow hover:shadow-glow-hover transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Ver resultados
+            Ver graficas dinamicas
           </motion.a>
         </motion.div>
         <motion.div
